@@ -32,6 +32,7 @@ export default tseslint.config(
     },
     // recommended に含まれていない eslint-plugin-react のルールを有効化
     rules: {
+      "react/no-unknown-property": "off",
       'react/destructuring-assignment': 'error', // Props などの分割代入を強制
       'react/hook-use-state': 'error', // useState の返り値の命名を [value, setValue] に統一
       'react/jsx-boolean-value': 'error', // boolean 型の Props の渡し方を統一

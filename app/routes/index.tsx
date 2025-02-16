@@ -9,8 +9,8 @@ const className = css`
 export default createRoute((c) => {
   const name = c.req.query("name") ?? "Hono";
   return c.render(
-    <div className={className}>
-      <h1>Hello, {name}!</h1>
+    <div class={className}>
+      <h1 class="text-red-500">Hello, {name}!</h1>
       <Counter />
     </div>,
     { title: name }
