@@ -13,7 +13,7 @@ export type Article = {
 export default function ArticleCard({ article }: Props) {
   return (
     <div className="flex w-2xl border-b-2 hover:text-gray-500 border-gray-100">
-      <div className="p-4 flex flex-col items-start  mt-auto">
+      <div className="p-4 flex flex-col items-start mt-auto">
         <div className="flex gap-1">
           {article.tags.split(",").map((x, i) => {
             return (

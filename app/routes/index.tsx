@@ -12,7 +12,7 @@ export default createRoute((c) => {
     eager: true,
   });
 
-  const name = c.req.query("name") ?? "Hono";
+  const name = "Guccigu's Blog";
   return c.render(
     <div class={className}>
       <ArticleCardList articles={articles} />
