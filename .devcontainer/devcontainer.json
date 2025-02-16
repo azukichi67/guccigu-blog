@@ -37,8 +37,7 @@
 				"editor.guides.bracketPairs": true,
 				"editor.formatOnSave": true,
 				"editor.codeActionsOnSave": {
-					"source.fixAll.eslint": "explicit",
-					"source.organizeImports": "explicit"
+					"source.fixAll.eslint": "explicit"
 				},
 				"[typescript]": {
 					"editor.formatOnSave": true,
