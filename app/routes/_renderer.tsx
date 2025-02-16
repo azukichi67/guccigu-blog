@@ -1,6 +1,9 @@
 import { Style } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Script } from "honox/server";
+import Footer from "@/layouts/Footer";
+import Header from "@/layouts/Header";
+import Layout from "@/layouts/Layout";
 
 export default jsxRenderer(({ children, title }) => {
   return (
@@ -13,7 +16,13 @@ export default jsxRenderer(({ children, title }) => {
         <Script async src="/app/client.ts" />
         <Style />
       </head>
-      <body>{children}</body>
+      <body>
+        <Layout>
+          <Header />
+          {children}
+          <Footer />
+        </Layout>
+      </body>
     </html>
   );
 });
