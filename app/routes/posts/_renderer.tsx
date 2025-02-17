@@ -6,7 +6,7 @@ export default jsxRenderer(({ children, Layout, frontmatter }) => {
   return (
     <Layout description={frontmatter?.description} title={_title}>
       <div class="flex justify-center">
-        <div class="prose prose-lg w-3xl">{children}</div>
+        <div class="prose prose-lg w-2xl">{children}</div>
       </div>
     </Layout>
   );
