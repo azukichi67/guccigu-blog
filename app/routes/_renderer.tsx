@@ -1,5 +1,5 @@
 import { jsxRenderer } from "hono/jsx-renderer";
-import { Script } from "honox/server";
+import { Link, Script } from "honox/server";
 import Footer from "@/layouts/Footer";
 import Header from "@/layouts/Header";
 import Layout from "@/layouts/Layout";
@@ -12,7 +12,8 @@ export default jsxRenderer(({ children, title }) => {
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <title>{title}</title>
         <link href="/favicon.ico" rel="icon" />
-        <Script async src="/app/client.ts" />
+        <Link href="/app/style.css" rel="stylesheet" />
+        <Script src="/app/client.ts" />
       </head>
       <body>
         <Layout>

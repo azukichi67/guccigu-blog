@@ -9,6 +9,7 @@ services:
       target: development
     ports:
       - "5173:5173"
+      - "8788:8788"
     volumes:
       - ..:/usr/src/app
       - blog-node-modules:/usr/src/app/node_modules

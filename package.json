@@ -3,8 +3,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --mode client && vite build",
-    "preview": "wrangler pages dev",
+    "build": "vite build --mode client && NODE_ENV=production vite build",
+    "preview": "wrangler pages dev --ip 0.0.0.0",
     "deploy": "npm run build && wrangler pages deploy",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
@@ -22,6 +22,7 @@
     "@eslint/js": "^9.20.0",
     "@hono/vite-build": "^1.2.0",
     "@hono/vite-dev-server": "^0.18.1",
+    "@hono/vite-ssg": "^0.1.1",
     "@mdx-js/rollup": "^3.1.0",
     "@tailwindcss/typography": "^0.5.16",
     "eslint": "^9.20.1",
