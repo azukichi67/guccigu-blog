@@ -1,7 +1,7 @@
 import { jsxRenderer } from "hono/jsx-renderer";
 
 export default jsxRenderer(({ children, Layout, frontmatter }) => {
-  const _title = `${frontmatter?.title} | Guccigu's Blog`;
+  const _title = `${frontmatter?.title} | guccigu blog`;
 
   return (
     <Layout description={frontmatter?.description} title={_title}>

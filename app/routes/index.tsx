@@ -12,7 +12,7 @@ export default createRoute((c) => {
     eager: true,
   });
 
-  const name = "Guccigu's Blog";
+  const name = "guccigu blog";
   return c.render(
     <div class={className}>
       <ArticleCardList articles={articles} />
