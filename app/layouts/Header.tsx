@@ -12,7 +12,7 @@ export default function Header() {
           <a class="cursor-pointer mr-5 hover:text-gray-900" href="/">
             Blog
           </a>
-          <a class="cursor-pointer mr-5 hover:text-gray-900" href="/">
+          <a class="cursor-pointer mr-5 hover:text-gray-900" href="/about">
             About
           </a>
         </nav>

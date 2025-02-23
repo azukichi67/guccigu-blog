@@ -4,6 +4,7 @@ import {} from "hono";
 type Head = {
   title?: string;
   description?: string;
+  date?: string;
 };
 
 declare module "hono" {
