@@ -8,9 +8,12 @@ const className = css`
 `;
 
 export default createRoute((c) => {
-  const articles = import.meta.glob<{ frontmatter: Article }>("./posts/*.mdx", {
-    eager: true,
-  });
+  const articles = import.meta.glob<{ frontmatter: Article }>(
+    "./posts/**/*.mdx",
+    {
+      eager: true,
+    }
+  );
 
   const name = "guccigu blog";
   return c.render(
