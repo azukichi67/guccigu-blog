@@ -7,7 +7,8 @@
     "preview": "wrangler pages dev --ip 0.0.0.0",
     "deploy": "npm run build && wrangler pages deploy",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "plop": "plop"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +32,7 @@
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-unused-imports": "^4.1.4",
     "globals": "^15.15.0",
+    "plop": "^4.0.1",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.0.0",
     "typescript-eslint": "^8.24.0",
