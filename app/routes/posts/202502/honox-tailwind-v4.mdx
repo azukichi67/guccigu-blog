@@ -1,0 +1,70 @@
+---
+title: "[HonoX] Tailwind CSS v4 を使えるようにする"
+description: "[HonoX] Tailwind CSS v4 を使えるようにする"
+date: "2025/02/25"
+tags: "dev"
+published: true
+---
+
+このブログではスタイリングに <code className="bg-gray-200 text-gray-700 font-normal">Tailwind CSS</code> を使用しています。
+<code className="bg-gray-200 text-gray-700 font-normal">HonoX</code> で 最新の v4 を使ったら少し嵌りました。
+
+基本的には tailwind の[ドキュメント](https://tailwindcss.com/docs/installation/using-vite) 通りに導入していきます。  
+ポイントは2つあります。
+
+### 1. Link タグを使う
+
+head タグ内の link には honox の Link タグを使います。
+これを使うことで Vite の dev モードと prod モードで css ファイルの参照先を自動で切りかえてくれるようになります。
+
+```typescript
+import { jsxRenderer } from "hono/jsx-renderer";
+import { Link, Script } from "honox/server";
+import Footer from "@/layouts/Footer";
+import Header from "@/layouts/Header";
+import Layout from "@/layouts/Layout";
+
+export default jsxRenderer(({ children, title }) => {
+  return (
+    <html lang="ja">
+      <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>{title}</title>
+        <link href="/favicon.ico" rel="icon" />
+        <Link href="/app/style.css" rel="stylesheet" />
+        <Script src="/app/client.ts" />
+      </head>
+      <body>
+        <Layout>
+          <Header />
+          {children}
+          <Footer />
+        </Layout>
+      </body>
+    </html>
+  );
+});
+```
+
+### 2. ベースパスを明示的に設定する
+
+tailwind のドキュメントでは css への import は以下になっています。
+
+```css
+@import "tailwindcss";
+```
+
+ただ、これだとビルド時になぜかスタイルが反映されませんでした。  
+( dev 起動でと反映される)
+
+これは以下のようにベースパスを指定することで解消します。
+
+```css
+@import "tailwindcss" source("../app");
+```
+
+こちらの[スクラップ](https://zenn.dev/link/comments/0a709e6b154cb6)を参考にさせていただきました。
+
+**※ 追記**  
+最近どちらの内容も [README](https://github.com/honojs/honox) に反映されたようです

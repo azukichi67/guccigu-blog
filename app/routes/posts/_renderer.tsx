@@ -11,7 +11,7 @@ export default jsxRenderer(({ children, Layout, frontmatter }) => {
           <div class="text-4xl font-bold">{frontmatter?.title}</div>
         </div>
         <div class="flex justify-center p-10">
-          <div class="prose prose-base prose-a:text-blue-500 prose-code:bg-gray-200 prose-code:px-1 prose-code:font-normal prose-code:before:content-[''] prose-code:after:content-[''] max-w-none">
+          <div class="prose prose-base prose-a:text-blue-500  prose-code:px-2 prose-code:before:content-[''] prose-code:after:content-[''] max-w-none">
             {children}
           </div>
         </div>

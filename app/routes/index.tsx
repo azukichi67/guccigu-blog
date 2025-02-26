@@ -8,6 +8,7 @@ const className = css`
 `;
 
 export default createRoute((c) => {
+  // TODO ソート
   const articles = import.meta.glob<{ frontmatter: Article }>(
     "./posts/**/*.mdx",
     {
