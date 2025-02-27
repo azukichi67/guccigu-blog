@@ -3,6 +3,7 @@ type Props = {
 };
 
 export type Article = {
+  path: string;
   title: string;
   description: string;
   date: string;

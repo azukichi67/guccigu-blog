@@ -1,5 +1,6 @@
 import { css } from "hono/css";
 import { createRoute } from "honox/factory";
+import * as R from "remeda";
 import { Article } from "@/components/ArticleCard";
 import ArticleCardList from "@/components/ArticleCardList";
 
@@ -8,12 +9,21 @@ const className = css`
 `;
 
 export default createRoute((c) => {
-  // TODO ソート
-  const articles = import.meta.glob<{ frontmatter: Article }>(
+  const entries = import.meta.glob<{ frontmatter: Article }>(
     "./posts/**/*.mdx",
     {
       eager: true,
     }
+  );
+  const articles = R.pipe(
+    Object.entries(entries),
+    R.filter(([_, module]) => module.frontmatter.published),
+    R.map(([path, module]) => {
+      return {
+        ...module.frontmatter,
+        path,
+      };
+    })
   );
 
   const name = "guccigu blog";
