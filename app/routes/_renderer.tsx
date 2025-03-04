@@ -2,7 +2,6 @@ import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
 import Footer from "@/layouts/Footer";
 import Header from "@/layouts/Header";
-import Layout from "@/layouts/Layout";
 
 export default jsxRenderer(({ children, title }) => {
   return (
@@ -15,12 +14,10 @@ export default jsxRenderer(({ children, title }) => {
         <Link href="/app/style.css" rel="stylesheet" />
         <Script src="/app/client.ts" />
       </head>
-      <body>
-        <Layout>
-          <Header />
-          {children}
-          <Footer />
-        </Layout>
+      <body class="flex flex-col items-center">
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
