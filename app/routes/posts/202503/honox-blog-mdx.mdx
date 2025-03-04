@@ -1,0 +1,147 @@
+---
+title: "[HonoX] mdx でブログの記事を書く"
+description: "[HonoX] mdx でブログの記事を書く"
+date: "2025/03/04"
+tags: "dev"
+published: true
+---
+
+このブログでは記事を書くのに mdx を使ってます。  
+( Headless CMS も使ってみようとも思ったけど mdx も触ってみたかったので )
+
+基本的には以下、Hono 開発者様が公開している Example を元に作りました。
+
+- [honox-examples (mdx)](https://github.com/yusukebe/honox-examples/tree/main/projects/mdx)
+
+その他いじった部分について書こうと思います。
+
+## ■ mdx 部分にスタイルをあてる
+
+mdx で書いた markdown は  `h1` や `p` タグなどを使った HTML に変換されます。  
+これらのタグにいい感じの見た目になるようにスタイルをあてたいです。
+
+TailwindCSS には公式でこういったタグにいい感じのスタイルをあててくれる [tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography/tree/main) というプラグインがありました。  
+
+まずはインストールして、
+
+```
+npm install -D @tailwindcss/typography
+```
+
+css ファイルにプラグインとして追加します
+
+```css
+@import "tailwindcss" source("../app");
+@plugin "@tailwindcss/typography";
+```
+
+そして、mdx の親要素で `prose` クラスを設定すればOK  
+(`prose-base` は文字サイズの設定です、細かい設定は README を参照ください )
+
+```html
+<div class="prose prose-base max-w-none">{children}</div>
+```
+
+## ■ インラインコードのスタイルを変える
+
+tailwindcss-typography ですがインラインコードのスタイルのスタイルがデフォルトだとちょっと微妙でした。
+
+※ ↓ こんな感じ
+![inlinecode](/images/202503/honox-blog-mdx/inline.png)
+
+zenn とか qiita とかでみる感じにしたかったので少しいじりました
+
+tailwindcss-typography は tailwind の config で一部のタグのスタイルを上書きすることができます。  
+自分は以下のようにしました。
+
+```typescript
+// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./app/**/*.tsx'],
+  theme: {
+    extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            a: {
+              color: '#3182ce',
+              '&:hover': {
+                color: '#2c5282',
+              },
+            },
+            code: {
+              'background-color': '#e5e7eb',
+              color: '#374151',
+              padding: '2px 4px',
+              'border-radius': '3px',
+              fontWeight: '400',
+            },
+            'code::before': {
+              content: 'none',
+            },
+            'code::after': {
+              content: 'none',
+            },
+          }
+        }
+      }
+    }
+  },
+  plugins: []
+}
+```
+
+こちらも設定ファイル作ったら css ファイルに追加します。
+
+```css
+@import "tailwindcss" source("../app");
+@plugin "@tailwindcss/typography";
+@config "../tailwind.config.js";
+```
+
+これでインラインコードが `こんな感じ` になりました。
+
+## ■ シンタックスハイライトを使えるようにする
+
+tailwindcss-typography だけではシンタックスハイライトはできませんでした。  
+なので、シンタックスハイライトには別途 [Rehype Pretty Code](https://rehype-pretty.pages.dev/) を使いました。
+
+Rehype Pretty Code は mdx ドキュメントのコードブロックでいい感じでシンタックスハイライトしてくれる rehype プラグインです。
+
+以下のリポジトリを参考にさせていただきました。
+
+- [remix-blog-mdx](https://github.com/pcattori/remix-blog-mdx/tree/main)
+
+こちらも必要なパッケージをインストールして、
+
+```
+npm i rehype-pretty-code shiki
+```
+`vite.config.ts` に `rehypePrettyCode` の設定を追加します。
+
+```typescript
+    mdx({
+      jsxImportSource: "hono/jsx",
+      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+      rehypePlugins: [[rehypePrettyCode, highlightOptions]],
+    }),
+```
+
+`highlightOptions` は Rehype Pretty Code のオプションでテーマなど設定できます。  
+`bypassInlineCode` はインラインコードは無視するかどうかの設定です。  
+これを `true` にしておかないと先ほどいい感じにしたインラインコードのスタイルが消えてしまいます。
+
+```typescript
+const highlightOptions: Options = {
+  theme: "one-dark-pro",
+  defaultLang: "plaintext",
+  keepBackground: true,
+  bypassInlineCode: true,
+};
+```
+
+これでシンタックスハイライトもできました。  
+今後は以下記事などを参考にさせていただいて行番号やファイル名を表示できるようにしたいです。
+
+- [Rehype Pretty Code で、コードブロックに行番号を付け、特定の行をハイライトする](https://osgsm.io/blog/rehype-pretty-code-additional-settings)
