@@ -8,7 +8,7 @@ type Props = {
 export default function ArticleCardList({ articles }: Props) {
   return (
     <div class="flex justify-center">
-      <ul class="article-list">
+      <ul>
         {R.sortBy(articles, [R.prop("date"), "desc"]).map((x, i) => {
           return (
             <li class="p-2" key={i}>
