@@ -11,8 +11,8 @@ export default jsxRenderer(({ children, title }) => {
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <title>{title}</title>
         <link href="/favicon.ico" rel="icon" />
-        <Link href="/app/style.css" rel="stylesheet" />
         <Script src="/app/client.ts" />
+        <Link href="/app/style.css" rel="stylesheet" />
       </head>
       <body class="flex flex-col items-center">
         <Header />

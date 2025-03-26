@@ -15,7 +15,9 @@ export default jsxRenderer(({ children, Layout, frontmatter }) => {
           </div>
         </div>
         <div class="flex justify-start pt-2 md:w-4xl md:p-10">
-          <div class="prose prose-base max-w-screen p-4">{children}</div>
+          <div class="prose prose-base dark:prose-invert max-w-screen p-4">
+            {children}
+          </div>
         </div>
       </div>
     </Layout>

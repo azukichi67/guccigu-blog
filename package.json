@@ -13,8 +13,8 @@
   "private": true,
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
-    "hono": "^4.7.1",
-    "honox": "^0.1.34",
+    "hono": "^4.7.5",
+    "honox": "^0.1.38",
     "rehype-pretty-code": "^0.14.0",
     "remeda": "^2.21.0",
     "shiki": "^1.29.2",
