@@ -5,8 +5,8 @@ export default jsxRenderer(({ children, Layout, frontmatter }) => {
 
   return (
     <Layout description={frontmatter?.description} title={_title}>
-      <div class="flex flex-col items-center w-screen">
-        <div class="flex flex-col items-center md:w-full p-7 md:p-10 border-b-2 border-gray-400">
+      <div class="flex flex-col items-center w-full">
+        <div class="flex flex-col items-center w-full max-w-screen p-7 md:p-10 border-b-2 border-gray-400">
           <div class="text-xl text-center md:text-2xl font-bold">
             {frontmatter?.date}
           </div>
