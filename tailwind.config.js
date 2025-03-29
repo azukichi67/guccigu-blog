@@ -36,6 +36,17 @@ export default {
               content: 'none',
             },
           }
+        },
+        invert: {
+          css: {
+            'code:not(pre code)': {
+              'background-color': '#696969',
+              color: '#ffffff',
+              padding: '2px 4px',
+              'border-radius': '3px',
+              fontWeight: '400',
+            },
+          }
         }
       }
     }
