@@ -1,12 +1,7 @@
-import { css } from "hono/css";
 import { createRoute } from "honox/factory";
 import * as R from "remeda";
 import { Article } from "@/components/ArticleCard";
 import ArticleCardList from "@/components/ArticleCardList";
-
-const className = css`
-  font-family: sans-serif;
-`;
 
 export default createRoute((c) => {
   const entries = import.meta.glob<{ frontmatter: Article }>(
@@ -28,7 +23,7 @@ export default createRoute((c) => {
 
   const name = "guccigu blog";
   return c.render(
-    <div class={className}>
+    <div class="font-family: sans-serif">
       <ArticleCardList articles={articles} />
     </div>,
     { title: name }

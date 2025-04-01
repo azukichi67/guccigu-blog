@@ -1,7 +1,7 @@
 import { useEffect, useState } from "hono/jsx";
 
 const ThemeButton = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean | null>(null);
 
   useEffect(() => {
     const isDark =
@@ -22,6 +22,10 @@ const ThemeButton = () => {
       setIsDarkMode(true);
     }
   };
+
+  if (isDarkMode === null) {
+    return <div />;
+  }
 
   return (
     <button
