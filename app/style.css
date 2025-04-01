@@ -5,13 +5,13 @@
  /*see: https://zenn.dev/deer/articles/d3b104ac97711d*/
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 45 100% 99%;
     --foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --card: 0 0% 100%;
+    --card: 45 100% 99%;
     --card-foreground: 222.2 47.4% 11.2%;
   }
 
