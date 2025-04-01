@@ -9,7 +9,7 @@ export default function Header() {
           <span class="ml-3 text-xl">guccigu blog</span>
         </div>
       </a>
-      <nav class="flex flex-grow gap-x-3 md:gap-x-5 md:pr-5 justify-end text-gray-600 dark:text-foreground">
+      <nav class="flex flex-grow justify-end items-center gap-x-3 md:gap-x-5 md:pr-5  text-gray-600 dark:text-foreground">
         <ThemeButton />
         <a
           class="cursor-pointer text-center hover:text-gray-900 dark:hover:text-gray-500"
@@ -18,7 +18,7 @@ export default function Header() {
           Blog
         </a>
         <a
-          class="cursor-pointer hover:text-gray-900 dark:hover:text-gray-500"
+          class="cursor-pointer text-center hover:text-gray-900 dark:hover:text-gray-500"
           href="/about"
         >
           About

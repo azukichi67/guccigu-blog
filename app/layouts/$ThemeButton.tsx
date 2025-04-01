@@ -24,7 +24,10 @@ const ThemeButton = () => {
   };
 
   return (
-    <button class="cursor-pointer hover:opacity-70" onClick={toggleTheme}>
+    <button
+      class="flex items-center justify-center cursor-pointer hover:opacity-70"
+      onClick={toggleTheme}
+    >
       {isDarkMode ? (
         <svg
           class="w-6 h-6"
@@ -32,7 +35,10 @@ const ThemeButton = () => {
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1021 12.79z" />
+          <path
+            d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+            transform="translate(3, 1)"
+          />
         </svg>
       ) : (
         <svg
