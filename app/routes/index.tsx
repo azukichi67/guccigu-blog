@@ -26,6 +26,6 @@ export default createRoute((c) => {
     <div class="font-family: sans-serif">
       <ArticleCardList articles={articles} />
     </div>,
-    { title: name }
+    { title: name, description: "技術や日々についてをぼちぼち書いてくブログ" }
   );
 });

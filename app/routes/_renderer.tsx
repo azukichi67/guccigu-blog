@@ -3,13 +3,14 @@ import { Link, Script } from "honox/server";
 import Footer from "@/layouts/Footer";
 import Header from "@/layouts/Header";
 
-export default jsxRenderer(({ children, title }) => {
+export default jsxRenderer(({ children, title, description }) => {
   return (
     <html lang="ja">
       <head>
         <meta charset="utf-8" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <title>{title}</title>
+        {description ? <meta content={description} name="description" /> : null}
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <link href="/favicon.ico" rel="icon" />
         <script
           // eslint-disable-next-line react/no-danger
@@ -28,7 +29,7 @@ export default jsxRenderer(({ children, title }) => {
         <Script src="/app/client.ts" />
         <Link href="/app/style.css" rel="stylesheet" />
       </head>
-      <body class="flex flex-col items-center">
+      <body class="max-w-7xl px-5 md:px-20 mx-auto">
         <Header />
         {children}
         <Footer />
