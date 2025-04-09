@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+JP:wght@100..900&display=swap');
 @import "tailwindcss" source("../app");
+
 @plugin "@tailwindcss/typography";
 @config "../tailwind.config.js";
 
@@ -30,5 +32,14 @@
 @layer base {
   body {
     @apply bg-background text-foreground;
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+  }
+}
+
+@layer utilities {
+  .font-anton {
+    font-family: "Anton", sans-serif;
   }
 }
