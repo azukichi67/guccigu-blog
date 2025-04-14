@@ -28,6 +28,8 @@ export default {
               padding: '2px 4px',
               'border-radius': '3px',
               fontWeight: '400',
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word', 
             },
             'code::before': {
               content: 'none',

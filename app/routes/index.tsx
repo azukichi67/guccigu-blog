@@ -23,7 +23,7 @@ export default createRoute((c) => {
 
   const name = "guccigu blog";
   return c.render(
-    <div class="font-family: sans-serif">
+    <div>
       <ArticleCardList articles={articles} />
     </div>,
     { title: name, description: "技術や日々についてをぼちぼち書いてくブログ" }
