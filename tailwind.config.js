@@ -16,6 +16,7 @@ export default {
       typography: {
         DEFAULT: {
           css: {
+            maxWidth: '100%', 
             a: {
               color: '#3182ce',
               '&:hover': {
@@ -28,8 +29,6 @@ export default {
               padding: '2px 4px',
               'border-radius': '3px',
               fontWeight: '400',
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-word', 
             },
             'code::before': {
               content: 'none',
