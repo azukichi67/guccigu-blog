@@ -1,0 +1,88 @@
+---
+title: "[Tailwind CSS & HonoX] ダークモード対応"
+description: "Tailwind CSS と HonoX でダークモード対応した"
+date: "2025/04/15"
+tags: "dev"
+published: true
+---
+
+`Tailwind` を使ってダークモード対応しました。
+
+- [https://tailwindcss.com/docs/dark-mode](https://tailwindcss.com/docs/dark-mode)
+
+Tailwind CSS では基本的に `dark:` を使ってダークモード適用時に設定したいスタイルを指定します  
+これは自身の祖先要素の class に `dark` が付与されている場合に適用されます 
+
+例えば以下では背景色に `bg-white` ではなく `bg-black` が適用されます
+
+```html
+<html class="dark">
+  <body>
+    <div class="bg-white dark:bg-black">
+      テストです
+    </div>
+  </body>
+</html>
+```
+
+## ■ ダークモード適用時のスタイル指定
+
+前述したとおり、基本的には `dark:` を使って指定します  
+ただ、テキストを持つ要素に都度 `dark:` を使っていくのは面倒ですし漏れの可能性もあります
+
+なので、以下の記事を参考に カスタムカラー と CSS変数 を使って配色を一元管理する方法を使いました
+
+- [Tailwind CSS を使った ダークモード実装の効率的なアプローチ](https://zenn.dev/deer/articles/d3b104ac97711d)
+
+詳細や実装方法はこちらの記事に記載されているので割愛しますが、  
+この手法により、個別に対応したいところ以外は `dark:` を意識せずに実装できるようになりました
+
+## ■ ダークモードへの切り替え
+
+ダークモードの ON/OFF は class に `dark` をつけるか外すかで行います。
+
+```html
+<html class="dark">
+```
+
+これで切り替えるには `tailwind.config.js` の `darkMode` 設定で `class` を指定しておく必要があります。
+
+```typescript
+export default {
+  darkMode: 'class', // ← これを追加
+```
+
+`dark` のつけ外しはボタンで行うようにしました (右上の太陽と月のボタン)  
+これはインタラクティブなコンポーネントになるので、`HonoX` では Islandsアーキテクチャを使用します
+
+- [HonoXについて - Islandsアーキテクチャ](https://zenn.dev/yusukebe/articles/724940fa3f2450#islands%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3)
+
+最近の HonoX ではファイル名先頭に `$` をつけるだけでIslandコンポーネントとして認識されるようなってます  
+( 関連するフォルダ配下に配置できるので便利！ )
+
+このボタンを押下することで class に `dark` をつけ外しするようにしています  
+このつけ外しする方法はドキュメントに記載があったのでそちらを参考にしています
+
+- [https://tailwindcss.com/docs/dark-mode#with-system-theme-support](https://tailwindcss.com/docs/dark-mode#with-system-theme-support)
+
+
+## ■ 一瞬だけライトモードで表示されてしまう
+
+上記だけだとダークモードの状態でページ遷移するたびに一瞬だけライトモードで表示されてしまいました  
+( フラッシュみたいで目が死ぬ、、、)
+
+これは一度 CSS でスタイルが適用されてから `dark` 付与が実行されるためでした
+
+なので、スタイル適用前に `<script>` タグで `dark` 設定用の処理を実行するようにして解消しました
+
+```html
+<script>
+    (function() {
+        const isDark = localStorage.theme === "dark" || (!("theme"in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", isDark);
+    }
+    )();
+</script>
+```
+
+ちょこちょこ嵌ったけどなんとかできてよかった、、！
