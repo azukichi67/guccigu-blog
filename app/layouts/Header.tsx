@@ -7,7 +7,9 @@ export default function Header() {
         <a class="cursor-pointer" href="/">
           <div class="flex font-medium items-center text-gray-900 dark:text-foreground">
             <img alt="icon" class="w-10 h-10" src="/images/icon.jpg" />
-            <span class="ml-3 text-xl font-anton">guccigu blog</span>
+            <span class="ml-3 text-xl tracking-wider font-anton">
+              guccigu blog
+            </span>
           </div>
         </a>
       </h1>

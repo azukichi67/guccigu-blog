@@ -43,3 +43,45 @@
     font-family: "Anton", sans-serif;
   }
 }
+
+figcaption[data-rehype-pretty-code-title] {
+  @apply py-1 px-4 rounded-t-md text-white bg-neutral-600;
+}
+ 
+figcaption[data-rehype-pretty-code-title] + pre {
+  @apply mt-0 rounded-t-none;
+}
+
+figure[data-rehype-pretty-code-figure] [data-line] {
+  @apply border-l-2 border-transparent;
+}
+
+[data-highlighted-line] {
+  @apply !bg-sky-500/10 !border-indigo-500;
+}
+
+code[data-line-numbers] {
+  counter-reset: line;
+}
+ 
+code[data-line-numbers] > [data-line]::before {
+  display: inline-block;
+  width: 12px;
+  margin-right: 1rem;
+  color: gray;
+  text-align: right;
+  content: counter(line);
+  counter-increment: line;
+}
+ 
+code[data-line-numbers-max-digits="2"] > [data-line]::before {
+  width: 1.25rem;
+}
+ 
+code[data-line-numbers-max-digits="3"] > [data-line]::before {
+  width: 1.75rem;
+}
+ 
+code[data-line-numbers-max-digits="4"] > [data-line]::before {
+  width: 2.25rem;
+}

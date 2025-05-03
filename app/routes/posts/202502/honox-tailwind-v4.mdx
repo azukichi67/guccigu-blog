@@ -17,7 +17,7 @@ published: true
 head タグ内の link には honox の Link タグを使います。
 これを使うことで Vite の dev モードと prod モードで css ファイルの参照先を自動で切りかえてくれるようになります。
 
-```typescript
+```typescript {15} title="_renderer.tsx" showLineNumbers
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
 import Footer from "@/layouts/Footer";
