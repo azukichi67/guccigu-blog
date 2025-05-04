@@ -54,8 +54,7 @@ zenn とか qiita とかでみる感じにしたかったので少しいじり�
 tailwindcss-typography は tailwind の config で一部のタグのスタイルを上書きすることができます。  
 自分は以下のようにしました。
 
-```typescript
-// tailwind.config.js
+```typescript title="tailwind.config.js" showLineNumbers
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./app/**/*.tsx'],
@@ -120,7 +119,7 @@ npm i rehype-pretty-code shiki
 ```
 `vite.config.ts` に `rehypePrettyCode` の設定を追加します。
 
-```typescript
+```typescript title="vite.config.ts"
     mdx({
       jsxImportSource: "hono/jsx",
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
@@ -132,7 +131,7 @@ npm i rehype-pretty-code shiki
 `bypassInlineCode` はインラインコードは無視するかどうかの設定です。  
 これを `true` にしておかないと先ほどいい感じにしたインラインコードのスタイルが消えてしまいます。
 
-```typescript
+```typescript title="vite.config.ts"
 const highlightOptions: Options = {
   theme: "one-dark-pro",
   defaultLang: "plaintext",
