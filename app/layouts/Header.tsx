@@ -2,7 +2,7 @@ import ThemeButton from "@/layouts/$ThemeButton";
 
 export default function Header() {
   return (
-    <header class="flex justify-between items-center w-full pt-5 mb-5 md:mb-0 md:pb-5">
+    <header class="sticky top-0 bg-background flex justify-between items-center w-full pt-5 mb-5 md:mb-0 md:pb-5">
       <h1>
         <a class="cursor-pointer" href="/">
           <div class="flex font-medium items-center text-gray-900 dark:text-foreground">
