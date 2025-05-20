@@ -1,7 +1,7 @@
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
+import Header from "@/layouts/$Header";
 import Footer from "@/layouts/Footer";
-import Header from "@/layouts/Header";
 
 export default jsxRenderer(({ children, title, description }) => {
   return (

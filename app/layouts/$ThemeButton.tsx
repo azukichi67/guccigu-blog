@@ -34,7 +34,7 @@ const ThemeButton = () => {
     >
       {isDarkMode ? (
         <svg
-          class="w-6 h-6"
+          class="w-8 h-8 transition-transform duration-500 rotate-0"
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +46,7 @@ const ThemeButton = () => {
         </svg>
       ) : (
         <svg
-          class="w-6 h-6"
+          class="w-8 h-8 transition-transform duration-500 rotate-90"
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"

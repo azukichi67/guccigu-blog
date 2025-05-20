@@ -1,0 +1,70 @@
+import { useState } from "hono/jsx";
+import { HamburgerMenu } from "@/layouts/$HamburgerMenu";
+import ThemeButton from "@/layouts/$ThemeButton";
+
+export default function Header() {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <header class="bg-background flex justify-between items-center w-full pt-5 md:sticky md:top-0 md:pb-5 )">
+      <h1>
+        <a class="cursor-pointer" href="/">
+          <div class="flex items-center">
+            <img
+              alt="icon"
+              class="w-12 h-12 rounded-lg"
+              src="/images/icon.jpg"
+            />
+            <span class="ml-3 text-3xl tracking-wider font-alfa-slab-one transition-all duration-700 ease-out opacity-100">
+              guccigu blog
+            </span>
+          </div>
+        </a>
+      </h1>
+      <div class="flex justify-center items-center gap-5">
+        <nav
+          class={`fixed inset-0 z-10 transition-all duration-700 ease-out backdrop-blur-md ${
+            isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          } md:relative md:inset-auto md:opacity-100 md:pointer-events-auto`}
+        >
+          <ul class="flex flex-col gap-5 justify-center items-center absolute top-60 left-1/2 -translate-x-1/2 md:relative md:top-0 md:translate-x-0 md:left-0 md:flex-row">
+            <li>
+              <a
+                class="cursor-pointer text-center text-2xl tracking-wider font-alfa-slab-one hover:text-gray-500"
+                href="/"
+                onClick={() => setMenuOpen(false)}
+              >
+                Top
+              </a>
+            </li>
+            <li>
+              <a
+                class="cursor-pointer text-center text-2xl tracking-wider font-alfa-slab-one hover:text-gray-500"
+                href="/"
+                onClick={() => setMenuOpen(false)}
+              >
+                Blog
+              </a>
+            </li>
+            <li>
+              <a
+                class="cursor-pointer text-center text-2xl tracking-wider font-alfa-slab-one hover:text-gray-500"
+                href="/about"
+                onClick={() => setMenuOpen(false)}
+              >
+                About
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div className="fixed top-7 right-5 z-20 flex items-center gap-3 md:relative md:top-0 md:right-0 ">
+          <HamburgerMenu
+            isMenuOpen={isMenuOpen}
+            onClick={() => setMenuOpen(!isMenuOpen)}
+          />
+          <ThemeButton />
+        </div>
+      </div>
+    </header>
+  );
+}
