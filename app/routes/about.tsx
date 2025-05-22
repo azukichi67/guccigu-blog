@@ -1,10 +1,14 @@
 import { createRoute } from "honox/factory";
+import Title from "@/components/Title";
 
 export default createRoute((c) => {
   return c.render(
-    <div class="flex h-full justify-center items-center">
-      <div class="text-3xl">準備中</div>
-    </div>,
+    <>
+      <Title>About</Title>
+      <div class="flex h-full justify-center items-center">
+        <div class="text-3xl">準備中</div>
+      </div>
+    </>,
     {
       title: "about",
     }
