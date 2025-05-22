@@ -67,7 +67,7 @@ export default function Header() {
             <li>
               <a
                 class="cursor-pointer text-center text-2xl tracking-wider font-alfa-slab-one hover:text-gray-500"
-                href="/"
+                href="/posts"
                 onClick={() => setMenuOpen(false)}
               >
                 Blog
