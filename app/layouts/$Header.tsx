@@ -1,12 +1,24 @@
 import { useState } from "hono/jsx";
 import { HamburgerMenu } from "@/layouts/$HamburgerMenu";
 import ThemeButton from "@/layouts/$ThemeButton";
+import { cn } from "@/utils/tailwind.util";
 
 export default function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header class="bg-background flex justify-between items-center w-full pt-5 md:sticky md:top-0 md:pb-5 )">
+    <header
+      class={cn(
+        "flex justify-center items-end w-full h-26 pt-5 bg-background",
+        [
+          "md:justify-between",
+          "md:items-center",
+          "md:sticky",
+          "md:top-0",
+          "md:pb-5",
+        ]
+      )}
+    >
       <h1>
         <a class="cursor-pointer" href="/">
           <div class="flex items-center">
