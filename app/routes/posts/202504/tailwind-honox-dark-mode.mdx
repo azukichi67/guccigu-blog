@@ -75,14 +75,20 @@ export default {
 
 なので、スタイル適用前に `<script>` タグで `dark` 設定用の処理を実行するようにして解消しました
 
+```typescript title="set-theme.ts" showLineNumbers
+const setTheme = () => {
+  const isDark =
+    localStorage.theme === "dark" ||
+    (!("theme" in localStorage) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+  document.documentElement.classList.toggle("dark", isDark);
+};
+
+setTheme();
+```
+
 ```html
-<script>
-    (function() {
-        const isDark = localStorage.theme === "dark" || (!("theme"in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
-        document.documentElement.classList.toggle("dark", isDark);
-    }
-    )();
-</script>
+<script src="/static/set-theme.js" />
 ```
 
 ちょこちょこ嵌ったけどなんとかできてよかった、、！

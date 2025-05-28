@@ -28,6 +28,7 @@ export default defineConfig({
       },
       devServer: { adapter },
     }),
+    ssg({ entry }),
     mdx({
       jsxImportSource: "hono/jsx",
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
@@ -36,8 +37,15 @@ export default defineConfig({
     build(),
     tailwindcss(),
     tsconfigPaths(),
-    ssg({ entry }),
   ],
+  build: {
+    rollupOptions: {
+      input: ["./app/set-theme.ts"],
+      output: {
+        entryFileNames: "static/[name].js",
+      },
+    },
+  },
   server: {
     host: "0.0.0.0",
     watch: {

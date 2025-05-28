@@ -12,20 +12,11 @@ export default jsxRenderer(({ children, title, description }) => {
         {description ? <meta content={description} name="description" /> : null}
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <link href="/favicon.ico" rel="icon" />
-        <script
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                const isDark =
-                  localStorage.theme === "dark" ||
-                  (!("theme" in localStorage) &&
-                    window.matchMedia("(prefers-color-scheme: dark)").matches);
-                document.documentElement.classList.toggle("dark", isDark);
-              })();
-            `,
-          }}
-        />
+        {import.meta.env.PROD ? (
+          <script src="/static/set-theme.js" />
+        ) : (
+          <script src="/app/set-theme.ts" />
+        )}
         <Script src="/app/client.ts" />
         <Link href="/app/style.css" rel="stylesheet" />
       </head>
