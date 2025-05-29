@@ -19,38 +19,46 @@ const highlightOptions: Options = {
 };
 
 // see: https://zenn.dev/ryuapp/scraps/503cb72f57c7bb
-export default defineConfig({
-  envDir: "./env",
-  plugins: [
-    honox({
-      client: {
-        input: ["/app/style.css"],
+export default defineConfig(({ mode }) => {
+  if (mode === "script") {
+    return {
+      build: {
+        emptyOutDir: false,
+        rollupOptions: {
+          input: ["./app/set-theme.ts"],
+          output: {
+            entryFileNames: "static/[name].js",
+          },
+        },
       },
-      devServer: { adapter },
-    }),
-    ssg({ entry }),
-    mdx({
-      jsxImportSource: "hono/jsx",
-      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
-      rehypePlugins: [[rehypePrettyCode, highlightOptions]],
-    }),
-    build(),
-    tailwindcss(),
-    tsconfigPaths(),
-  ],
-  build: {
-    rollupOptions: {
-      input: ["./app/set-theme.ts"],
-      output: {
-        entryFileNames: "static/[name].js",
+    };
+  }
+
+  return {
+    envDir: "./env",
+    plugins: [
+      honox({
+        client: {
+          input: ["/app/style.css"],
+        },
+        devServer: { adapter },
+      }),
+      ssg({ entry }),
+      mdx({
+        jsxImportSource: "hono/jsx",
+        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+        rehypePlugins: [[rehypePrettyCode, highlightOptions]],
+      }),
+      build(),
+      tailwindcss(),
+      tsconfigPaths(),
+    ],
+    server: {
+      host: "0.0.0.0",
+      watch: {
+        usePolling: true,
+        interval: 1000,
       },
     },
-  },
-  server: {
-    host: "0.0.0.0",
-    watch: {
-      usePolling: true,
-      interval: 1000,
-    },
-  },
+  };
 });
