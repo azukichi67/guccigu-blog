@@ -6,7 +6,7 @@ export default createRoute((c) => {
     <>
       <Title>About</Title>
       <div class="flex h-full justify-center items-center">
-        <div class="text-3xl">準備中</div>
+        <div class="text-3xl pt-15">準備中</div>
       </div>
     </>,
     {
