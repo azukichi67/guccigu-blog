@@ -1,0 +1,87 @@
+---
+title: "DevContainer 上から SSH で Github に接続する"
+description: "DevContainer 上から SSH で Github に接続する"
+date: "2025/06/29"
+tags: "dev"
+published: true
+---
+
+いまのプロジェクトでは Devconteier 上で開発をしています  
+ただ、少し訳があってコンテナ上で git 操作する必要がありました  
+
+github へ SSH で通信をする際にローカルの鍵をコンテナ上で使うためにひと手間かかったので手順を残します
+
+## ■ 環境
+
+- Windows 11
+  - コードは WSL2 上に配置
+- SSH用の秘密鍵は Windows 上にある
+
+## ■ 手順
+
+ホストOSの`ssh-agent`に秘密鍵が登録されていればコンテナ内でも自動的に同じ鍵でSSH接続ができます  
+ただ、そのままだと起動するたびに鍵の登録が必要であり不便です
+
+なので、秘密鍵の管理などをしてくれる `Keychain` を利用します  
+WSL上で以下を行います
+
+- `Keychain` をインストールする
+
+```bash
+sudo apt-get install keychain
+```
+
+- `~/.bashrc` に鍵をロードするためのスクリプトを追記する
+
+```bash
+/usr/bin/keychain -q --nogui /mnt/c/Users/{username}/.ssh/id_ed25519 # 利用したい秘密鍵を指定
+source $HOME/.keychain/$(hostname)-sh
+```
+  
+これでWSLのターミナル起動時に自動でロードしてくれるのですが  
+Windows 上に置いてある鍵を利用したい場合はこのままだとエラーがでます
+
+```bash
+ * Error: Problem adding; giving up
+```
+
+これは秘密鍵への権限が不足しているためになります  
+なので、次は権限を更新する手順が必要になります
+
+- WSL上で権限操作できるように `wsl.conf` に設定を追記する
+
+```bash
+sudo vim /etc/wsl.conf
+```
+
+```plaintext title="wsl.conf"
+[automount]
+options = "metadata"
+```
+
+- WSL を再起動する
+
+```bash
+wsl --shutdown
+```
+
+- パーミッションを変更する
+
+```bash
+chmod 600 /mnt/c/Users/{username}/.ssh/id_ed25519
+```
+
+これでWSLのターミナル起動時にエラーは発生せず鍵をロードできるようになりました
+
+## ■ 動作確認
+
+この状態で Devcontainer でコンテナ起動します
+
+- コンテナ上で `ssh -T git@github.com` を実行してみる
+
+```bash
+root@f91f576fec41:/usr/src/app# ssh -T git@github.com
+Hi {username}! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+無事に認証が通っていることを確認できました！！
