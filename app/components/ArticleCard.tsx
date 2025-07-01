@@ -1,14 +1,7 @@
-type Props = {
-  article: Article;
-};
+import { Post } from "@/libs/posts";
 
-export type Article = {
-  path: string;
-  title: string;
-  description: string;
-  date: string;
-  tags: string;
-  published: boolean;
+type Props = {
+  article: Post;
 };
 
 export default function ArticleCard({ article }: Props) {

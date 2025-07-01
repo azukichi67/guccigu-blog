@@ -1,8 +1,9 @@
 import * as R from "remeda";
-import ArticleCard, { Article } from "@/components/ArticleCard";
+import ArticleCard from "@/components/ArticleCard";
+import { Post } from "@/libs/posts";
 
 type Props = {
-  articles: Article[];
+  articles: Post[];
 };
 
 export default function ArticleCardList({ articles }: Props) {
@@ -12,7 +13,7 @@ export default function ArticleCardList({ articles }: Props) {
         {R.sortBy(articles, [R.prop("date"), "desc"]).map((x, i) => {
           return (
             <li class="p-2" key={i}>
-              <a href={`${x.path.replace(/\.mdx$/, "")}`}>
+              <a href={`/posts/${x.slug}`}>
                 <ArticleCard article={x} />
               </a>
             </li>

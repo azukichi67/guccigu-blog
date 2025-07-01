@@ -10,7 +10,7 @@ export default createRoute((c) => {
       </div>
     </>,
     {
-      title: "about",
+      title: "About | guccigu blog",
     }
   );
 });

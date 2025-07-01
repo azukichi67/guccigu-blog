@@ -31,7 +31,7 @@ export default function (
     actions: [
       {
         type: "add",
-        path: "./app/routes/posts/{{directory}}/{{slug}}.mdx",
+        path: "./app/posts/{{directory}}/{{slug}}.mdx",
         templateFile: "./plop-templates/article/article.mdx.hbs",
       },
     ],
