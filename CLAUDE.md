@@ -50,6 +50,7 @@ public/            # 静的アセット (画像等)
 
 - ファイル形式: MDX
 - 配置先: `app/posts/YYYYMM/slug-name.mdx`
+- 段落内の改行には末尾に半角スペース2つを付ける
 - frontmatter:
   ```yaml
   title: 記事タイトル

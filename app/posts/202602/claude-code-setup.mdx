@@ -1,0 +1,107 @@
+---
+title: "Claude Code をプロジェクトに導入する"
+description: "Claude Code をプロジェクトに導入する"
+date: "2026/02/11"
+tags: "dev"
+published: true
+---
+
+Claude Code を使ってプロジェクトで AI アシスタントと開発できるようにしました  
+導入にあたって用意した設定ファイルと、その役割をまとめます
+
+## ■ Claude Code とは
+
+Anthropic が提供するターミナルベースの AI コーディングアシスタントです  
+プロジェクトのコードを理解した上で、コードの編集や git 操作、ビルドなどを自然言語で指示できます
+
+## ■ CLAUDE.md を用意する
+
+`CLAUDE.md` はプロジェクトのルートに置く指示書です  
+Claude Code が会話を開始するたびに自動で読み込み、プロジェクトの文脈を理解した状態で作業を始めてくれます
+
+以下のような内容を記載しました
+
+```markdown title="CLAUDE.md"
+# CLAUDE.md
+
+## プロジェクト概要
+
+Honox + Hono ベースの個人ブログ。Cloudflare Pages にデプロイ。
+
+## 技術スタック
+
+- フレームワーク: Honox / Hono
+- 言語: TypeScript (strict モード)
+- スタイリング: Tailwind CSS 4
+- コンテンツ: MDX (remark-frontmatter, rehype-pretty-code)
+- ビルド: Vite
+- デプロイ: Cloudflare Pages (Wrangler)
+- パッケージマネージャ: npm
+
+## コマンド
+
+- `npm run dev` - 開発サーバー起動
+- `npm run build` - ビルド
+- `npm run lint` - ESLint チェック
+- `npm run lint:fix` - ESLint 自動修正
+
+## コーディング規約
+
+- パスエイリアス: `@/*` → `./app/*`
+- ESLint + Prettier 連携
+```
+
+技術スタック、よく使うコマンド、ディレクトリ構成、コーディング規約などをまとめておくと  
+毎回説明しなくてもプロジェクトに合ったコードを書いてくれるようになります
+
+## ■ .claude/settings.json を用意する
+
+`.claude/settings.json` はコマンド実行の許可設定です  
+Claude Code はデフォルトでコマンド実行のたびにユーザーの承認を求めますが  
+よく使うコマンドを登録しておけば承認なしで実行できるようになります
+
+```json title=".claude/settings.json"
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev)",
+      "Bash(npm run build)",
+      "Bash(npm run preview)",
+      "Bash(npm run lint)",
+      "Bash(npm run lint:fix)",
+      "Bash(npm run plop)",
+      "Bash(git *)"
+    ]
+  }
+}
+```
+
+`settings.json` はリポジトリにコミットしてチーム共有用として使います  
+個人用の設定は `settings.local.json` に書いて `.gitignore` で除外するのがおすすめです
+
+## ■ .claudeignore を用意する
+
+`.claudeignore` は Claude Code に読み込ませたくないファイルを指定します  
+`.gitignore` と同じ書式で書けます
+
+```plaintext title=".claudeignore"
+node_modules/
+dist/
+.hono/
+.wrangler/
+package-lock.json
+```
+
+`node_modules` や `dist` のような巨大なディレクトリを除外することで  
+コンテキストの無駄遣いを防ぎ、より的確な回答が得られるようになります
+
+## ■ まとめ
+
+Claude Code の導入で用意したファイルは以下の3つです
+
+- `CLAUDE.md` … プロジェクトの指示書（技術スタック、規約など）
+- `.claude/settings.json` … コマンド実行の自動許可設定
+- `.claudeignore` … 不要ファイルの除外設定
+
+ひとまず言われれるがままに導入しました  
+他にもいろいろ便利なもの (skills とか) あると思いますが使いながら導入していこうと思います
