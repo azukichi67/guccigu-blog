@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.hono/
+.wrangler/
+package-lock.json
