@@ -79,29 +79,12 @@ Claude Code はデフォルトでコマンド実行のたびにユーザーの�
 `settings.json` はリポジトリにコミットしてチーム共有用として使います  
 個人用の設定は `settings.local.json` に書いて `.gitignore` で除外するのがおすすめです
 
-## ■ .claudeignore を用意する
-
-`.claudeignore` は Claude Code に読み込ませたくないファイルを指定します  
-`.gitignore` と同じ書式で書けます
-
-```plaintext title=".claudeignore"
-node_modules/
-dist/
-.hono/
-.wrangler/
-package-lock.json
-```
-
-`node_modules` や `dist` のような巨大なディレクトリを除外することで  
-コンテキストの無駄遣いを防ぎ、より的確な回答が得られるようになります
-
 ## ■ まとめ
 
-Claude Code の導入で用意したファイルは以下の3つです
+Claude Code の導入で用意したファイルは以下の2つです
 
 - `CLAUDE.md` … プロジェクトの指示書（技術スタック、規約など）
 - `.claude/settings.json` … コマンド実行の自動許可設定
-- `.claudeignore` … 不要ファイルの除外設定
 
 ひとまず言われれるがままに導入しました  
 他にもいろいろ便利なもの (skills とか) あると思いますが使いながら導入していこうと思います
