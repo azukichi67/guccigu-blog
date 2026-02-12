@@ -59,3 +59,9 @@ public/            # 静的アセット (画像等)
   tags: [tag1, tag2]
   published: true
   ```
+
+## 詳細ドキュメント
+
+- [システム仕様](docs/system-spec.md) - ページ構成、URL マッピング、データフロー、記事フォーマット、ダークモード、レスポンシブ対応
+- [システム構成](docs/architecture.md) - 技術スタック詳細、ビルドプロセス、SSG、MDX パイプライン、スタイリング、デプロイ
+- [コンポーネントリファレンス](docs/components.md) - コンポーネント、レイアウト、ライブラリ、ユーティリティの Props と役割
