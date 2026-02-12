@@ -9,5 +9,8 @@
       "Bash(npm run plop)",
       "Bash(git *)"
     ]
+  },
+  "enabledPlugins": {
+    "example-skills@anthropic-agent-skills": true
   }
 }

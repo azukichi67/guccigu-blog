@@ -1,0 +1,61 @@
+---
+title: "CLAUDE.md と AGENTS.md"
+description: "CLAUDE.md と AGENTS.md"
+date: "2026/02/12"
+tags: "dev"
+published: true
+---
+
+
+
+
+AIコーディングエージェントはただコードを書く・読む・修正するだけでなく、プロジェクトのコンテキストを理解した上で動作することが求められます  
+しかし、エージェントはプロジェクトのことを何も知らない状態でセッションを開始します  
+
+そこで登場するのが　`AGENTS.md` や `CLAUDE.md` です  
+
+このファイルにプロジェクトの概要・コーディング規約・よく使うコマンドなどを書いておくことで、エージェントが毎回ゼロから学習しなくても適切に振る舞えるようになります  
+
+
+## ■ `CLAUDE.md` とは
+
+Claude Code 専用の設定ファイルです  
+セッション開始時に自動的に読み込まれます  
+
+プロジェクトルートだけでなくサブディレクトリやホームディレクトリに置くことでスコープを使い分けることができます  
+
+例：
+
+```markdown
+# My Project
+
+## Overview
+Node.js + Expressで構築したECサイトのバックエンドAPIです  
+
+## Commands
+- `npm run dev`  — 開発サーバー起動
+- `npm test`     — テスト実行
+- `npm run lint` — Lintチェック
+
+## Notes
+- `.env` ファイルは直接編集しないこと
+- DBの変更は必ずマイグレーションファイルを作成すること
+```
+
+## ■ `AGENTS.md` とは
+
+Codex や GitHub Copilot など複数のエージェントが参照する汎用的な設定ファイルです  
+`CLAUDE.md` と内容は同じです
+
+
+## ■ 複数のエージェントを使う場合
+
+`CLAUDE.md` も `AGENTS.md` も用途は同じですがエージェントによって参照しにいくファイルが異なります  
+※ 例えばClaude Code は `CLAUDE.md` を勝手に見ますが `AGENTS.md` は見てくれない  
+
+プロジェクトメンバー内で使うエージェントが違うと上記２つを同期して管理しなくてはならず面倒です  
+
+いまいるプロジェクトでは `AGENTS.md` には "`CLAUDE.md` を見に行け" とだけ指示するようにして運用されています  
+
+調べてみるとシンボリックリンクを使って回避する方法もあるようです  
+[https://zenn.dev/explaza/articles/33f1dd2003c981](https://zenn.dev/explaza/articles/33f1dd2003c981)
