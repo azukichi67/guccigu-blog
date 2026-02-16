@@ -1,0 +1,87 @@
+---
+title: "git worktree で複数ブランチを並行作業する"
+description: "AI駆動開発で複数ブランチを並列開発するために git worktree を導入した事例と使い方を解説します。"
+date: "2026/02/16"
+tags: "dev,git"
+published: true
+---
+
+Claude Code などの AI ツールを使った開発では、複数のタスクを同時並行で進めれるようになります。  
+例えば：
+
+- メインブランチでドキュメント整備をしながら、feature ブランチで新機能を実装
+- 一方のブランチで AI にビルドやテストを実行させつつ、別ブランチで次のタスクに着手
+- レビュー待ちのブランチを残したまま、新しい feature ブランチで作業開始
+
+ただ、従来の `git checkout` だとブランチ切り替えのたびに作業が中断されますが、git worktree を使えば複数のブランチを同時に扱えます。  
+
+## ■ git worktree とは
+
+git worktree は、1つのリポジトリで複数の作業ディレクトリ（worktree）を持てる機能です。  
+通常は `git checkout` でブランチを切り替えますが、worktree を使うと別ディレクトリに別のブランチをチェックアウトできます。
+
+## ■ worktree を作成する
+
+例として新機能開発用のブランチを worktree で用意します
+
+```bash title="worktree を作成" showLineNumbers
+# 現在の状態を確認
+git branch -a
+git worktree list
+
+# 新しい worktree を作成（新規ブランチ付き）
+git worktree add ../my-project-feature -b feature/new-feature
+```
+
+これで以下の2つの worktree ができました：
+
+- **メイン**: `~/projects/my-project` (ブランチ: `main`)
+- **新機能開発用**: `~/projects/my-project-feature` (ブランチ: `feature/new-feature`)
+
+`git worktree add <パス> -b <ブランチ名>` で、指定パスにリポジトリのコピーが作られ、同時に新しいブランチが切られます。  
+main での作業を邪魔せずに、別ディレクトリで新機能の開発ができるようになりました。
+
+## ■ worktree を削除する
+
+作業が終わってマージしたら、worktree は不要になるので削除します。
+
+```bash title="worktree とブランチを削除" showLineNumbers
+# worktree を削除
+git worktree remove ../my-project-feature
+
+# ローカルブランチを削除
+git branch -d feature/new-feature
+
+# リモートブランチも削除
+git push origin --delete feature/new-feature
+
+# 確認
+git worktree list
+git branch -a
+```
+
+これで worktree とブランチの両方を削除できました
+
+## ■ よく使うコマンド
+
+```bash title="worktree 操作まとめ" showLineNumbers
+# worktree 一覧を表示
+git worktree list
+
+# 既存ブランチから worktree を作成
+git worktree add <パス> <既存ブランチ名>
+
+# 新規ブランチで worktree を作成
+git worktree add <パス> -b <新規ブランチ名>
+
+# worktree を削除
+git worktree remove <パス>
+
+# worktree の情報を削除（ディレクトリが既に削除済みの場合）
+git worktree prune
+```
+
+## ■ まとめ
+
+git worktree はブランチ切り替えなしで複数の作業を同時進行できるので AI ツールを使った開発フローと相性が良さそうです。  
+あるブランチで作業中だったとしても stash したり中途半端にコミットせずともブランチ切り替えができるので並列開発以外でも便利と思いました。
