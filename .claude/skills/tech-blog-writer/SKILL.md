@@ -33,7 +33,7 @@ Read [references/blog-conventions.md](references/blog-conventions.md) for the fu
 - **Frontmatter**: `date` uses `/` separator (`2026/02/16`), `tags` comma-separated no spaces
 - **Section headings**: Use `## ■ セクションタイトル` format
 - **Code blocks**: Include `title`, `showLineNumbers`, and line highlighting (`{4}` or `{2-4}`) where appropriate
-- **Line breaks**: IMPORTANT - Add two trailing spaces at the end of lines for soft breaks within paragraphs
+- **Line breaks**: IMPORTANT - Add two trailing spaces at the end of lines for soft breaks within paragraphs. The Write tool strips trailing whitespace, so after writing the MDX file, use `sed -i -e 'Ns/$/  /' <file>` (where N is the line number) to add trailing spaces to all paragraph-internal lines, then verify with `grep -n '  $' <file>`
 - **No tables**: Do NOT use markdown table syntax (`| ... |`). Use bullet points instead
 - **Tone**: Casual first-person Japanese, technical terms in English, short paragraphs
 - **Structure**: Introduction → `## ■` sections with code examples → closing thoughts
